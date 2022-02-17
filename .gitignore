@@ -35,6 +35,9 @@ atlassian*
 /dev/
 /grunt-config.json.sample
 /lib/
+/vendor/
+/phpserver/
+/var/
 /nginx.conf.sample
 /ackage.json.sample
 /app/code/Magento/TestModule*
