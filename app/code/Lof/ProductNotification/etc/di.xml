@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Landofcoder
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Landofcoder.com license that is
+ * available through the world-wide-web at this URL:
+ * http://landofcoder.com/license
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category   Landofcoder
+ * @package    Lof_ProductNotification
+ * @copyright  Copyright (c) 2017 Landofcoder (http://www.landofcoder.com/)
+ * @license    http://www.landofcoder.com/LICENSE-1.0.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Lof\ProductNotification\Api\CustomerManagementInterface" type="Lof\ProductNotification\Model\Api\CustomerManagement"/>
+    <preference for="Lof\ProductNotification\Api\ModuleConfigManagementInterface" type="Lof\ProductNotification\Model\Api\ModuleConfigManagement"/>
+	<preference for="Lof\ProductNotification\Api\SubscribeProductSalePriceManagementInterface" type="Lof\ProductNotification\Model\Api\SubscribeProductSalePriceManagement"/>
+	<preference for="Lof\ProductNotification\Api\SubscribeProductStockManagementInterface" type="Lof\ProductNotification\Model\Api\SubscribeProductStockManagement"/>
+	<preference for="Lof\ProductNotification\Api\UnsubscribePriceManagementInterface" type="Lof\ProductNotification\Model\Api\UnsubscribePriceManagement"/>
+	<preference for="Lof\ProductNotification\Api\UnsubscribePriceAllManagementInterface" type="Lof\ProductNotification\Model\Api\UnsubscribePriceAllManagement"/>
+	<preference for="Lof\ProductNotification\Api\UnsubscribeStockManagementInterface" type="Lof\ProductNotification\Model\Api\UnsubscribeStockManagement"/>
+	<preference for="Lof\ProductNotification\Api\UnsubscribeStockAllManagementInterface" type="Lof\ProductNotification\Model\Api\UnsubscribeStockAllManagement"/>
+	<preference for="Lof\ProductNotification\Api\ListSubscribePriceManagementInterface" type="Lof\ProductNotification\Model\Api\ListSubscribePriceManagement"/>
+	<preference for="Lof\ProductNotification\Api\ListSubscribeStockManagementInterface" type="Lof\ProductNotification\Model\Api\ListSubscribeStockManagement"/>
+	<preference for="Lof\ProductNotification\Api\SubscribePriceRepositoryInterface" type="Lof\ProductNotification\Model\Api\SubscribePriceRepository"/>
+	<preference for="Lof\ProductNotification\Api\SubscribeStockRepositoryInterface" type="Lof\ProductNotification\Model\Api\SubscribeStockRepository"/>
+    <preference for="Lof\ProductNotification\Api\Data\PriceInterface" type="Lof\ProductNotification\Model\Price"/>
+    <preference for="Lof\ProductNotification\Api\Data\StockInterface" type="Lof\ProductNotification\Model\Stock"/>
+    <preference for="Lof\ProductNotification\Api\Data\PriceSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Lof\ProductNotification\Api\Data\StockSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Lof\ProductNotification\Api\Data\UnsubscribeRequestInterface" type="Lof\ProductNotification\Model\Api\Data\UnsubscribeRequest"/>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="productnotification_stock_listing_data_source" xsi:type="string">Lof\ProductNotification\Model\ResourceModel\Stock\Grid\Collection</item>
+                <item name="productnotification_price_listing_data_source" xsi:type="string">Lof\ProductNotification\Model\ResourceModel\Price\Grid\Collection</item>
+                <item name="productnotification_report_grid_data_source" xsi:type="string">Lof\ProductNotification\Model\ResourceModel\Report\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Lof\ProductNotification\Model\ResourceModel\Stock\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">lof_product_notification_stock</argument>
+            <argument name="eventPrefix" xsi:type="string">productnotification_stock_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">form_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Lof\ProductNotification\Model\ResourceModel\Stock</argument>
+        </arguments>
+    </type>
+    <type name="Lof\ProductNotification\Model\ResourceModel\Price\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">lof_product_notification_price</argument>
+            <argument name="eventPrefix" xsi:type="string">productnotification_price_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">form_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Lof\ProductNotification\Model\ResourceModel\Price</argument>
+        </arguments>
+    </type>
+    <virtualType name="ProductNotificationGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="FormGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Magento\Cms\Model\ResourceModel\Stock\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">ProductNotificationGirdFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Lof\ProductNotification\Model\ResourceModel\Report\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">catalog_product_entity</argument>
+            <argument name="resourceModel" xsi:type="string">Magento\Catalog\Model\ResourceModel\Product</argument>
+        </arguments>
+    </type>
+
+    <type name="\Lof\ProductNotification\Controller\AbstractIndex">
+        <plugin name="authentication" type="\Lof\ProductNotification\Controller\Index\Plugin" sortOrder="10"/>
+    </type>
+
+    <preference for="Magento\ConfigurableProduct\Helper\Data" type="Lof\ProductNotification\Helper\ConfigurableProductData" />
+    
+</config>

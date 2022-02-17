@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Landofcoder
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Landofcoder.com license that is
+ * available through the world-wide-web at this URL:
+ * http://landofcoder.com/license
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category   Landofcoder
+ * @package    Lof_ProductNotification
+ * @copyright  Copyright (c) 2017 Landofcoder (http://www.landofcoder.com/)
+ * @license    http://www.landofcoder.com/LICENSE-1.0.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="productnotification_productalert_email_stock_template" label="Stock Alert" file="stock_alert.html" type="html" module="Lof_ProductNotification" area="frontend"/>
+    <template id="productnotification_productalert_email_price_template" label="Price Alert" file="price_alert.html" type="html" module="Lof_ProductNotification" area="frontend"/>
+    <template id="productnotification_productalert_email_new_template" label="New Product" file="price_alert.html" type="html" module="Lof_ProductNotification" area="frontend"/>
+    <template id="productnotification_productalert_email_new_product_template" label="New Product Alert" file="new_product_alert.html" type="html" module="Lof_ProductNotification" area="frontend"/>
+    <template id="productnotification_productalert_cron_error_email_template" label="Cron Error Warning" file="cron_error.html" type="html" module="Lof_ProductNotification" area="adminhtml"/>
+</config>

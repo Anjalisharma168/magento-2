@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page layout="1column" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="mage/gallery/gallery.css"/>
+    </head>
+    <update handle="catalog_product_opengraph" />
+    <update handle="page_calendar"/>
+    <body>
+        <attribute name="itemtype" value="http://schema.org/Product" />
+        <attribute name="itemscope" value="itemscope"/>
+         <block class="Magento\Catalog\Block\Product\View\Attributes" name="product.attributesnow" as="additionalattr" template="Magento_Catalog::product/view/downloads.phtml" group="detailed_info">
+                    <arguments>
+                        <argument translate="true" name="title" xsi:type="string">Custom Tab </argument>
+                        <argument name="sort_order" xsi:type="string">60</argument>
+                    </arguments>
+         </block>
+         <move element="product.attributesnow" destination="product.info.details" after="-"/>
+          <referenceBlock name="page.main.title">
+            <arguments>
+                <argument name="css_class" xsi:type="string">product</argument>
+                <argument name="add_base_attribute" xsi:type="string">itemprop="name"</argument>
+            </arguments>
+        </referenceBlock>
+        <move element="page.main.title" destination="product.info.main" before="-"/>
+        <container name="product_block_add" as="product_block" label="Some block" htmlTag="div" htmlClass="block-container-details"/>
+
+
+
+
+  <block class="Magento\Cms\Block\Block" name="product_icons">
+    <arguments>
+      <argument name="block_id" xsi:type="string">product_icons</argument>
+    </arguments>
+  </block>
+  <block class="Magento\Cms\Block\Block" name="productpage_custom">
+    <arguments>
+      <argument name="block_id" xsi:type="string">productpage_custom</argument>
+    </arguments>
+  </block>
+<move element="product_block_add" destination="content" after="product.info.media"/>
+<move element="productpage_custom" destination="product_block_add" after="-"/>
+<move element="product_icons" destination="product.info.main" after="-"/>
+    </body> 
+</page>

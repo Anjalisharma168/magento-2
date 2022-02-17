@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Landofcoder
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Landofcoder.com license that is
+ * available through the world-wide-web at this URL:
+ * http://landofcoder.com/license
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category   Landofcoder
+ * @package    Lof_ProductNotification
+ * @copyright  Copyright (c) 2017 Landofcoder (http://www.landofcoder.com/)
+ * @license    http://www.landofcoder.com/LICENSE-1.0.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Lof_ProductNotification::productnotification" title="LOF Product Notification" module="Lof_ProductNotification" sortOrder="20" resource="Magento_Backend::productnotification_elements" parent="Magento_Catalog::catalog"/>
+        <add id="Lof_ProductNotification::stock" title="Out of Stock Notifications" module="Lof_ProductNotification" sortOrder="10" parent="Lof_ProductNotification::productnotification" action="productnotification/stock/index" resource="Lof_ProductNotification::stock"/> 
+        <add id="Lof_ProductNotification::price" title="Price Notifications" module="Lof_ProductNotification" sortOrder="30" parent="Lof_ProductNotification::productnotification" action="productnotification/price/index" resource="Lof_ProductNotification::price"/>
+        <add id="Lof_ProductNotification::lof_report" title="Report" module="Lof_ProductNotification" sortOrder="40" parent="Lof_ProductNotification::productnotification" action="productnotification/report" resource="Lof_ProductNotification::question"/>
+        <add id="Lof_ProductNotification::configuration" title="Settings" module="Lof_ProductNotification" sortOrder="1000" parent="Lof_ProductNotification::productnotification" action="adminhtml/system_config/edit/section/productnotification" resource="Lof_ProductNotification::configurations"/> 
+    </menu>
+</config>

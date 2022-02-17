@@ -1,0 +1,62 @@
+<?php
+/** @var $block \Lof\ProductNotification\Block\Customer\Stock */
+?>
+<?php
+$collection      = $this->getCollection();
+$total           = $collection->count();
+$_helper = $this->helper('Magento\Catalog\Helper\Output');
+$imageBlockBuilder = $block->getImageBlockBuilder();
+$image = 'category_page_grid';
+?>
+<?php if ($total) { ?>
+
+<table class="data table pnf-table">
+	<thead>
+		<tr>
+			<th class="col image"><?php echo __('Product Image') ?></th>
+			<th class="col name"><?php echo __('Product Name') ?></th>
+			<th class="col sku"><?php echo __('SKU') ?></th>
+			<th class="col sku"><?php echo __('Subscribed On') ?></th>
+			<th class="col sku"><?php echo __('Actions') ?></th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php foreach ($collection as $stock) { ?>
+		<?php
+		$_product          = $stock->getProduct();
+		$_availableProduct = $stock->getAvailableProduct();
+		$productUrl        = $_product->getProductUrl();
+		if ($_availableProduct) {
+			$productUrl = $_availableProduct->getProductUrl();
+		}
+		?>
+		<tr>
+			<td>
+				<?php // Product Image ?>
+				<a href="<?php echo $productUrl ?>" class="product-item-photo">
+					<?php echo $block->getImage($_product, $image)->toHtml(); ?>
+				</a>
+			</td>
+			<td class="product-name">
+				<a class="product-item-link" href="<?php echo $productUrl ?>">
+					<?php echo $_helper->productAttribute($_product, $_product->getName(), 'name'); ?>
+				</a>
+			</td>
+			<td class="product-sku"><?php echo $_product->getSku() ?></td>
+			<td class="product-date"><?php echo $block->formatDate($_product->getAddDate(), \IntlDateFormatter::SHORT) ?></td>
+			<td class="product-action">
+				<a href="#" class="product-delete"
+				data-post='<?php echo $block->getPostDataParams($_product);?>'
+				title="<?php echo __('Delete') ?>">
+			</a>
+		</td>
+	</tr>
+	<?php } ?>
+</tbody>
+</table>
+
+<?php echo $this->getPagerHtml(); ?>
+
+<?php } else { ?>
+<div class="message info empty"><span><?php echo __('There are no subscriptions yet.'); ?></span></div>
+<?php } ?>

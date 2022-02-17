@@ -1,0 +1,39 @@
+<?php
+/** @var \Magento\Newsletter\Block\Subscribe $block */
+?>
+<div class="block newsletter">
+  <div class="title"><strong><?php /* @escapeNotVerified */ echo __('Newsletter') ?></strong></div>
+  <div class="content">
+    <form class="form subscribe"
+          novalidate
+          action="<?php echo $block->escapeUrl($block->getFormActionUrl()) ?>"
+          method="post"
+          data-mage-init='{"validation": {"errorClass": "mage-error"}}'
+          id="newsletter-validate-detail">
+          <h3>NEWSLETTER</h3>
+          <h5>Sign up to receive the latest feedbacks</h5>
+      <!-- <div class="field full_name">
+        <label class="label" for="full_name"><span><?php echo $block->escapeHtml(__('Name')) ?></span></label>
+        <div class="control">
+          <input name="full_name" type="text" id="full_name"
+                 placeholder="<?php echo $block->escapeHtmlAttr(__('Name')) ?>"
+                 data-validate="{required:true}"/>
+        </div>
+      </div> -->
+       <div class="field email">
+        <label class="label" for="email"><span><?php echo $block->escapeHtml(__('Email')) ?></span></label>
+        <div class="control">
+          <input name="email" type="text" id="email"
+                 placeholder="<?php echo $block->escapeHtmlAttr(__('Email')) ?>"
+                 data-validate="{required:true}"/>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="action subscribe primary" title="<?php echo $block->escapeHtmlAttr(__('SUBSCRIBE')) ?>" type="submit">
+          <span><?php echo $block->escapeHtml(__('SUBSCRIBE')) ?></span>
+        </button>
+      </div>
+    </form>
+   
+  </div>
+</div> 

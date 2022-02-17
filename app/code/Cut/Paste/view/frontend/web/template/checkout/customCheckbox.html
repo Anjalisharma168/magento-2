@@ -1,0 +1,23 @@
+<div id="testing">
+	<div>
+	<label>
+		please select Delivery Date
+	</label>
+	<input type="date" data-bind='value:rawDate' />
+</div>
+
+<div>
+	<label>please select Delivery Time</label>
+	<input name="Test" type="radio" value="9-12" data-bind="checked:radioValue" />9am-12pm
+	<input name="Test" type="radio" value="12-3" data-bind="checked:radioValue" />12pm-3pm
+	<input name="Test" type="radio" value="3-6" data-bind="checked:radioValue" />3pm-6pm
+	<input name="Test" type="radio" value="6-9" data-bind="checked:radioValue" />6pm-9pm
+</div>
+<div>
+<label>please enter Comment</label>
+<textarea data-bind = "value: textValue "></textarea>
+</div>
+
+<button data-bind = "value: submitForm , event: {click: submitFormData}, 
+         valueUpdate: 'aftersubmitbutton'">Submit</button>
+</div>

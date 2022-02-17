@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<page layout="3columns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<update handle="default_head_blocks"/>
+	<body>
+		<referenceBlock name="register-link">
+			<arguments>
+				<argument name="label" xsi:type="string" translate="true">Register</argument></arguments>
+			</referenceBlock>
+			<!-- <referenceContainer name="header-wrapper"> -->
+			<!-- <block class="Magento\Framework\View\Element\Template" name="customblock" template="Magento_Theme::custom.phtml" /> -->
+			<!-- </referenceContainer> -->
+		<!-- 	<container name="custom.container" as="someContainer" label="Some Container" htmlTag="div" htmlClass="some-container" />
+			<move element="customblock" destination="custom.container" />
+			<move element="custom.container" destination="header-wrapper"  after='logo'/>
+			<move element="minicart" destination="custom.container" after='-'/> -->
+
+			<referenceBlock name="header.links">
+				<block class="Magento\Framework\View\Element\Html\Link" name="custom-link">
+					<arguments>
+						<argument name="label" xsi:type="string" translate="true">Checkout</argument>
+						<argument name="path" xsi:type="string" translate="true">checkout</argument>
+					</arguments>
+				</block>
+			</referenceBlock>
+			<block class="Magento\Cms\Block\Block" name="custom_footer">
+				<arguments>
+					<argument name="block_id" xsi:type="string">custom_footer</argument>
+				</arguments>
+			</block>
+			<move element="custom_footer" destination="footer-container" before="-"/>
+			<referenceBlock name="footer_links" remove="true"/>
+			<move element="form.subscribe.new" destination="content" before="page-footer" />
+			<referenceBlock name="form.subscribe" remove="true"/>
+			<referenceBlock name="copyright" remove="true"/>
+			<container name="header.content.1" as="someContainer" label="Some Container" htmlTag="div" htmlClass="header_content_1" />
+			<container name="header.content.2" as="someContainer" label="Some Container" htmlTag="div" htmlClass="header_content_2" />
+			<container name="header.content.3" as="someContainer" label="Some Container" htmlTag="div" htmlClass="header_content_3" />
+			<container name="header.content.4" as="someContainer" label="Some Container" htmlTag="div" htmlClass="header_content_4" />
+			<block class="Magento\Cms\Block\Block" name="custom_head">
+				<arguments>
+					<argument name="block_id" xsi:type="string">custom_header</argument>
+				</arguments>
+			</block>
+			<move element="logo" destination="header.content.1" />
+			
+			<move element="header.content.1" destination="header-wrapper" before='-'/>
+			
+			<move element="custom_head" destination="header.content.2" />
+			
+			<move element="header.content.2" destination="header-wrapper" after='-'/>
+			
+			<move element="custom_head" destination="header.content.3" before="-" />
+			
+			<move element="header.content.3" destination="header.content.2" after='-'/>
+			
+			<move element="minicart" destination="header.content.3" after='-'/>
+			
+			<move element="top.search" destination="header.content.4" />
+
+			<move element="header.content.4" destination="header.content.2" after='-'/>
+		</body>
+	</page>

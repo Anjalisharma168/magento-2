@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Landofcoder
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Landofcoder.com license that is
+ * available through the world-wide-web at this URL:
+ * http://landofcoder.com/license
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category   Landofcoder
+ * @package    Lof_ProductNotification
+ * @copyright  Copyright (c) 2017 Landofcoder (http://www.landofcoder.com/)
+ * @license    http://www.landofcoder.com/LICENSE-1.0.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<productnotification>
+			<chooser_defaults>
+				<catalog_product_widget_chooser>
+					<input_label>Product</input_label>
+					<button_text>Select Product...</button_text>
+				</catalog_product_widget_chooser>
+				<catalog_category_widget_chooser>
+					<input_label>Category</input_label>
+					<button_text>Select Category...</button_text>
+				</catalog_category_widget_chooser>
+				<cms_block_widget_chooser>
+					<input_label>Block</input_label>
+					<button_text>Select Block...</button_text>
+				</cms_block_widget_chooser>
+				<cms_page_widget_chooser>
+					<input_label>CMS Page</input_label>
+					<button_text>Select CMS Page...</button_text>
+				</cms_page_widget_chooser>
+				<default>
+					<input_label>Element</input_label>
+					<button_text>Select...</button_text>
+				</default>
+			</chooser_defaults>
+			<general_settings>
+				<enable>1</enable>
+			</general_settings>
+			<productalert>
+				<email_identity>general</email_identity>
+				<allow_price>1</allow_price>
+				<disable_price_guest>0</disable_price_guest>
+				<allow_stock>1</allow_stock>
+				<disable_stock_guest>0</disable_stock_guest>
+				<allow_new>1</allow_new>
+				<email_price_template>productnotification_productalert_email_price_template</email_price_template>
+				<email_stock_template>productnotification_productalert_email_stock_template</email_stock_template>
+				<email_new_template>productnotification_productalert_email_new_template</email_new_template>
+				<allow_new_product>0</allow_new_product>
+				<email_new_product_template>productnotification_productalert_email_new_product_template</email_new_product_template>
+				<send_email_one_time>0</send_email_one_time>
+				<enable_log_data>1</enable_log_data>
+			</productalert>
+		</productnotification>
+	</default>
+</config>

@@ -1,0 +1,27 @@
+{
+    "name": "landofcoder/module-productnotification-graph-ql",
+    "description": "Magento 2 product notify in stock, sales price to subscriber Graph QL",
+    "type": "magento2-module",
+    "license": "GPL-3.0",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Landofcoder",
+            "email": "landofcoder@gmail.com",
+            "homepage": "https://landofcoder.com",
+            "role": "Magento 2 Extension Provider"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "landofcoder/module-product-notification": "*"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Lof\\ProductNotificationGraphQl\\": ""
+        }
+    }
+}

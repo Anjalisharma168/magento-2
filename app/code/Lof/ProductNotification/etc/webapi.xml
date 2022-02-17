@@ -1,0 +1,149 @@
+<?xml version="1.0" ?>
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+	<!-- Logged in customer manage subscription-->
+	<route url="/V1/lof-productnotification/me/prices" method="GET">
+        <service class="Lof\ProductNotification\Api\CustomerManagementInterface" method="getListPrice"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+
+	<route url="/V1/lof-productnotification/me/stocks" method="GET">
+        <service class="Lof\ProductNotification\Api\CustomerManagementInterface" method="getListStock"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+
+	<route url="/V1/lof-productnotification/me/price/:subscribePriceId" method="GET">
+        <service class="Lof\ProductNotification\Api\CustomerManagementInterface" method="getPriceById"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+
+	<route url="/V1/lof-productnotification/me/stock/:subscribeStockId" method="GET">
+        <service class="Lof\ProductNotification\Api\CustomerManagementInterface" method="getStockById"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+
+	<route url="/V1/lof-productnotification/me/price/:subscribePriceId" method="DELETE">
+        <service class="Lof\ProductNotification\Api\CustomerManagementInterface" method="deletePrice"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+
+	<route url="/V1/lof-productnotification/me/stock/:subscribeStockId" method="DELETE">
+        <service class="Lof\ProductNotification\Api\CustomerManagementInterface" method="deleteStock"/>
+        <resources>
+            <resource ref="self"/>
+        </resources>
+        <data>
+            <parameter name="customerId" force="true">%customer_id%</parameter>
+        </data>
+    </route>
+	
+	<!-- Frontend Product notification -->
+	<route method="POST" url="/V1/lof-productnotification/subscribeproductsaleprice">
+		<service class="Lof\ProductNotification\Api\SubscribeProductSalePriceManagementInterface" method="postSubscribeProductSalePrice"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+	<route method="POST" url="/V1/lof-productnotification/subscribeproductstock">
+		<service class="Lof\ProductNotification\Api\SubscribeProductStockManagementInterface" method="postSubscribeProductStock"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+	<route method="POST" url="/V1/lof-productnotification/unsubscribeprice">
+		<service class="Lof\ProductNotification\Api\UnsubscribePriceManagementInterface" method="postUnsubscribePrice"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+	<route method="POST" url="/V1/lof-productnotification/unsubscribepriceall">
+		<service class="Lof\ProductNotification\Api\UnsubscribePriceAllManagementInterface" method="postUnsubscribePriceAll"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+	<route method="POST" url="/V1/lof-productnotification/unsubscribestock">
+		<service class="Lof\ProductNotification\Api\UnsubscribeStockManagementInterface" method="postUnsubscribeStock"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+	<route method="POST" url="/V1/lof-productnotification/unsubscribestockall">
+		<service class="Lof\ProductNotification\Api\UnsubscribeStockAllManagementInterface" method="postUnsubscribeStockAll"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/lof-productnotification/moduleconfig/:storeId">
+		<service class="Lof\ProductNotification\Api\ModuleConfigManagementInterface" method="getModuleConfig"/>
+		<resources>
+			<resource ref="anonymous"/>
+		</resources>
+	</route>
+
+	<!-- Product Notification Admin Manage -->
+	
+	<!-- Subscribe Price Manage -->
+	<route method="GET" url="/V1/lof-productnotification/subsribeprices">
+		<service class="Lof\ProductNotification\Api\SubscribePriceRepositoryInterface" method="getList"/>
+		<resources>
+			<resource ref="Lof_ProductNotification::price"/>
+		</resources>
+	</route>
+	<route method="DELETE" url="/V1/lof-productnotification/subsribeprice/:subscribePriceId">
+		<service class="Lof\ProductNotification\Api\SubscribePriceRepositoryInterface" method="deleteById"/>
+		<resources>
+			<resource ref="Lof_ProductNotification::price_delete"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/lof-productnotification/subsribeprice/:subscribePriceId">
+        <service class="Lof\ProductNotification\Api\SubscribePriceRepositoryInterface" method="getById"/>
+        <resources>
+            <resource ref="Lof_ProductNotification::price"/>
+        </resources>
+    </route>
+
+	<!-- Subscribe Stock Manage -->
+	<route method="GET" url="/V1/lof-productnotification/subsribestocks">
+		<service class="Lof\ProductNotification\Api\SubscribeStockRepositoryInterface" method="getList"/>
+		<resources>
+			<resource ref="Lof_ProductNotification::stock"/>
+		</resources>
+	</route>
+	<route method="DELETE" url="/V1/lof-productnotification/subsribestock/:subsribeStockId">
+		<service class="Lof\ProductNotification\Api\SubscribeStockRepositoryInterface" method="deleteById"/>
+		<resources>
+			<resource ref="Lof_ProductNotification::stock_delete"/>
+		</resources>
+	</route>
+	<route method="GET" url="/V1/lof-productnotification/subsribestock/:subsribeStockId">
+		<service class="Lof\ProductNotification\Api\SubscribeStockRepositoryInterface" method="getById"/>
+		<resources>
+			<resource ref="Lof_ProductNotification::stock"/>
+		</resources>
+	</route>
+</routes>

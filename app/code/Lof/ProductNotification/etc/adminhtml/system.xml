@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Landofcoder
+ * 
+ * NOTICE OF LICENSE
+ * 
+ * This source file is subject to the Landofcoder.com license that is
+ * available through the world-wide-web at this URL:
+ * http://landofcoder.com/license
+ * 
+ * DISCLAIMER
+ * 
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ * 
+ * @category   Landofcoder
+ * @package    Lof_ProductNotification
+ * @copyright  Copyright (c) 2017 Landofcoder (http://www.landofcoder.com/)
+ * @license    http://www.landofcoder.com/LICENSE-1.0.html
+ */
+-->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="productnotification" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Product Notification</label>
+            <tab>landofcoder</tab>
+            <resource>Lof_ProductNotification::configurations</resource>
+            <group id="general_settings" translate="label" type="text" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <field id="enable" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="productalert" translate="label" type="text" sortOrder="250" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Product Alerts</label>
+                <field id="email_identity" translate="label" type="select" sortOrder="0" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Alert Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                </field>
+                <field id="allow_price" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Alert When Product Price Changes</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="disable_price_guest" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Disable Subscrible for Guest</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends><field id="allow_price">1</field></depends>
+                </field>
+                <field id="enable_price" translate="label comment" type="select" sortOrder="25" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Send Email After Price Update</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Email will been force send when admin update special price for product in backend.</comment>
+                    <depends><field id="allow_price">1</field></depends>
+                </field>
+                <field id="email_price_template" translate="label comment" type="select" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Price Alert Email Template</label>
+                    <comment>Email template chosen based on theme fallback when "Default" option is selected.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends><field id="allow_price">1</field></depends>
+                </field>
+                <field id="allow_stock" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Allow Alert When Product Comes Back in Stock</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_stock" translate="label comment" type="select" sortOrder="55" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Send Email After Edit in Stock</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Email will been force send when admin update stock, qty for product in backend.</comment>
+                    <depends><field id="allow_stock">1</field></depends>
+                </field>
+                <field id="email_stock_template" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Stock Alert Email Template</label>
+                    <comment>Email template chosen based on theme fallback when "Default" option is selected.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends><field id="allow_stock">1</field></depends>
+                </field>
+
+                <field id="allow_new_product" translate="label" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Allow Alert When Create New Product</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="email_new_product_template" translate="label comment" type="select" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>New Product Alert Email Template</label>
+                    <comment>Email template chosen based on theme fallback when "Default" option is selected.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends><field id="allow_new_product">1</field></depends>
+                </field>
+                <field id="disable_stock_guest" translate="label" type="select" sortOrder="95" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Disable Subscrible for Guest</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="cat_ids" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Selected Category IDs</label>
+                    <comment>Email notification just send to subsriber when new product in there category ids. Input the number category id as this: Id1,Id2,Id3 . Default: empty will apply all for new products.</comment>
+                    <depends><field id="allow_new_product">1</field></depends>
+                </field>
+                <field id="send_email_one_time" translate="label comment" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled Send Email One Time</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_log_data" translate="label" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enabled Logging Subscription Data</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+            <group id="productalert_cron" translate="label" type="text" sortOrder="260" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>Product Alerts Run Settings</label>
+                <field id="frequency" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Frequency</label>
+                    <source_model>Magento\Cron\Model\Config\Source\Frequency</source_model>
+                    <backend_model>Lof\ProductNotification\Model\Config\Backend\Product\Alert</backend_model>
+                </field>
+                <field id="time" translate="label" type="time" sortOrder="2" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Start Time</label>
+                </field>
+                <field id="error_email" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Error Email Recipient</label>
+                    <validate>validate-email</validate>
+                </field>
+                <field id="error_email_identity" translate="label" type="select" sortOrder="4" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Error Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                </field>
+                <field id="error_email_template" translate="label comment" type="select" sortOrder="5" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Error Email Template</label>
+                    <comment>Email template chosen based on theme fallback when "Default" option is selected.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

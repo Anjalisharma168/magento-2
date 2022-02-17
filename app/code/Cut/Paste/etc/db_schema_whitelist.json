@@ -1,0 +1,16 @@
+{
+    "sales_order": {
+        "column": {
+            "ordercomment": true,
+            "orderdate": true,
+            "ordertime": true
+        }
+    },
+    "quote": {
+        "column": {
+            "ordercomment": true,
+            "orderdate": true,
+            "ordertime": true
+        }
+    }
+}

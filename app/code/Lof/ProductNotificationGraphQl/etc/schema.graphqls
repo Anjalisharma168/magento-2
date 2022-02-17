@@ -1,0 +1,189 @@
+
+type Mutation {
+    
+    subscribeProductSalePrice (
+            product_id: Int! @doc(description: "Query by product_id."),
+            price: Float! @doc(description: "Query by price."),
+            subscriber_email: String! @doc(description: "Query by subscriber_email."),
+            subscriber_name: String! @doc(description: "Query by subscriber_name."),
+            product_sku: String @doc(description: "Query by product_sku."),
+            child_product_id: String @doc(description: "Query by child_product_id."),
+            message: String @doc(description: "Query by message.")
+    ) : String @resolver( class: "Lof\\ProductNotificationGraphQl\\Model\\Resolver\\SubscribeProductSalePrice") @doc(description: "Query by Mutation subscribe product on sales.") 
+    subscribeProductStock (
+            product_id: Int! @doc(description: "Query by product_id."),
+            product_sku: String @doc(description: "Query by product_sku."),
+            parent_product_id: String @doc(description: "Query by parent_product_id."),
+            subscriber_email: String! @doc(description: "Query by subscriber_email."),
+            subscriber_name: String! @doc(description: "Query by subscriber_name."),
+            super_attribute: String @doc(description: "Query by super_attribute."),
+            params: String @doc(description: "Query by params."),
+            message: String @doc(description: "Query by message.")
+    ) : String @resolver( class: "Lof\\ProductNotificationGraphQl\\Model\\Resolver\\SubscribeProductStock") @doc(description: "Query by Mutation subscribe product back stock.") 
+    unSubscribeProductSalePrice (
+            id: Int @doc(description: "Query by id."),
+            aid: String @doc(description: "Query by aid."),
+            email: String @doc(description: "Query by email."),
+            token: String @doc(description: "Query by token."),
+            website_id: Int = 0 @doc(description: "Query by id.")
+    ) : String @resolver( class: "Lof\\ProductNotificationGraphQl\\Model\\Resolver\\UnSubscribeProductSalePrice") @doc(description: "Query by Mutation un subscribe product on sales.") 
+    unSubscribeProductStock (
+            id: Int @doc(description: "Query by id."),
+            aid: String @doc(description: "Query by aid."),
+            email: String @doc(description: "Query by email."),
+            token: String @doc(description: "Query by token."),
+            website_id: Int = 0 @doc(description: "Query by id.")
+    ) : String @resolver( class: "Lof\\ProductNotificationGraphQl\\Model\\Resolver\\UnSubscribeProductStock") @doc(description: "Query by Mutation un subscribe product back stock.") 
+}
+
+type Query {
+    
+    mySubscribeProductSalePrice (
+        filters: MySubscribeProductSalePriceFilterInput @doc(description: "Identifies which subscribe product sales price filter inputs to search for and return.")
+        pageSize: Int = 20 @doc(description: "Specifies the maximum number of results to return at once. This attribute is optional.")
+        currentPage: Int = 1 @doc(description: "Specifies which page of results to return. The default value is 1.")
+        sort: MySubscribeProductSalePriceSortInput @doc(description: "Specifies which attributes to sort on, and whether to return the results in ascending or descending order.")
+    ) : MySubscribeProductSalePrices @resolver( class: "Lof\\ProductNotificationGraphQl\\Model\\Resolver\\MySubscribeProductSalePrice") @doc(description: "Query by Query logged in customer subscribe product sales price list.") @cache( cacheIdentity: "Lof\\ProductNotificationGraphQl\\Model\\Resolver\\MySubscribeProductSalePrice\\Identity")
+
+    mySubscribeProductStock (
+        filters: MySubscribeProductStockFilterInput @doc(description: "Identifies which subscribe product in stock filter inputs to search for and return.")
+        pageSize: Int = 20 @doc(description: "Specifies the maximum number of results to return at once. This attribute is optional.")
+        currentPage: Int = 1 @doc(description: "Specifies which page of results to return. The default value is 1.")
+        sort: MySubscribeProductStockSortInput @doc(description: "Specifies which attributes to sort on, and whether to return the results in ascending or descending order.")
+    ) : MySubscribeProductStocks @resolver( class: "Lof\\ProductNotificationGraphQl\\Model\\Resolver\\MySubscribeProductStock") @doc(description: "Query by Query logged in customer subscribe product out of stock list.") @cache( cacheIdentity: "Lof\\ProductNotificationGraphQl\\Model\\Resolver\\MySubscribeProductStock\\Identity")
+}
+
+input MySubscribeProductSalePriceFilterInput  @doc(description: "MySubscribeProductSalePriceFilterInput defines the filters to be used in the search. A filter contains at least one attribute, a comparison operator, and the value that is being searched for.")
+{
+    alert_price_id: FilterEqualTypeInput @deprecated(reason: "Filter Subscribe Product Sales Price alert_price_id")
+    customer_id: FilterEqualTypeInput @deprecated(reason: "Filter Subscribe Product Sales Price customer_id")
+    product_id: FilterEqualTypeInput @deprecated(reason: "Filter Subscribe Product Sales Price product_id")
+    store_id: FilterEqualTypeInput @deprecated(reason: "Filter Subscribe Product Sales Price store_id")
+    website_id: FilterEqualTypeInput @deprecated(reason: "Filter Subscribe Product Sales Price website_id")
+    token: FilterEqualTypeInput @deprecated(reason: "Filter Subscribe Product Sales Price token")
+    product_sku: FilterEqualTypeInput @deprecated(reason: "Filter Subscribe Product Sales Price product_sku")
+    add_date: FilterMatchTypeInput @deprecated(reason: "Filter Subscribe Product Sales Price add_date")
+    subscriber_email: FilterMatchTypeInput @deprecated(reason: "Filter Subscribe Product Sales Price subscriber_email")
+    subscriber_name: FilterMatchTypeInput @deprecated(reason: "Filter Subscribe Product Sales Price subscriber_name")
+    status: FilterEqualTypeInput @deprecated(reason: "Filter Subscribe Product Sales Price status")
+    child_product_id: FilterEqualTypeInput @deprecated(reason: "Filter Subscribe Product Sales Price child_product_id")
+}
+
+input MySubscribeProductStockFilterInput  @doc(description: "MySubscribeProductStockFilterInput defines the filters to be used in the search. A filter contains at least one attribute, a comparison operator, and the value that is being searched for.")
+{
+    alert_stock_id: FilterEqualTypeInput @deprecated(reason: "Filter Subscribe Product Stock alert_stock_id")
+    customer_id: FilterEqualTypeInput @deprecated(reason: "Filter Subscribe Product Stock customer_id")
+    product_id: FilterEqualTypeInput @deprecated(reason: "Filter Subscribe Product Stock product_id")
+    parent_product_id: FilterEqualTypeInput @deprecated(reason: "Filter Subscribe Product Stock parent_product_id")
+    store_id: FilterEqualTypeInput @deprecated(reason: "Filter Subscribe Product Stock store_id")
+    website_id: FilterEqualTypeInput @deprecated(reason: "Filter Subscribe Product Stock website_id")
+    token: FilterEqualTypeInput @deprecated(reason: "Filter Subscribe Product Stock token")
+    product_sku: FilterEqualTypeInput @deprecated(reason: "Filter Subscribe Product Stock product_sku")
+    add_date: FilterMatchTypeInput @deprecated(reason: "Filter Subscribe Product Stock add_date")
+    subscriber_email: FilterMatchTypeInput @deprecated(reason: "Filter Subscribe Product Stock subscriber_email")
+    subscriber_name: FilterMatchTypeInput @deprecated(reason: "Filter Subscribe Product Stock subscriber_name")
+    status: FilterEqualTypeInput @deprecated(reason: "Filter Subscribe Product Stock status")
+}
+
+input MySubscribeProductSalePriceSortInput @doc(description: "MySubscribeProductSalePriceSortInput specifies the attribute to use for sorting search results and indicates whether the results are sorted in ascending or descending order. It's possible to sort sliders using searchable attributes with enabled 'Use in Filter Options' option")
+{
+    alert_price_id: SortEnum @doc(description: "Sort by the alert_price_id (default).")
+    product_id: SortEnum @doc(description: "Sort by the product_id assigned to each slider.")
+    price: SortEnum @doc(description: "Sort by the price assigned to each slider.")
+    add_date: SortEnum @doc(description: "Sort by the add_date assigned to each slider.")
+    send_count: SortEnum @doc(description: "Sort by the send_count assigned to each slider.")
+    status: SortEnum @doc(description: "Sort by the status assigned to each slider.")
+    product_sku: SortEnum @doc(description: "Sort by the product_sku assigned to each slider.")
+    last_send_date: SortEnum @doc(description: "Sort by the last_send_date.")
+    store_id: SortEnum @doc(description: "Sort by the store_id.")
+}
+
+input MySubscribeProductStockSortInput @doc(description: "MySubscribeProductStockSortInput specifies the attribute to use for sorting search results and indicates whether the results are sorted in ascending or descending order. It's possible to sort sliders using searchable attributes with enabled 'Use in Filter Options' option")
+{
+    alert_stock_id: SortEnum @doc(description: "Sort by the alert_stock_id (default).")
+    product_id: SortEnum @doc(description: "Sort by the product_id assigned to each slider.")
+    price: SortEnum @doc(description: "Sort by the price assigned to each slider.")
+    add_date: SortEnum @doc(description: "Sort by the add_date assigned to each slider.")
+    send_count: SortEnum @doc(description: "Sort by the send_count assigned to each slider.")
+    status: SortEnum @doc(description: "Sort by the status assigned to each slider.")
+    product_sku: SortEnum @doc(description: "Sort by the product_sku assigned to each slider.")
+    last_send_date: SortEnum @doc(description: "Sort by the last_send_date.")
+    store_id: SortEnum @doc(description: "Sort by the store_id.")
+}
+
+type MySubscribeProductSalePrice {
+    
+    alert_price_id  : Int  @doc(description: "Query by alert_price_id.") 
+    customer_id  : String  @doc(description: "Query by customer_id.") 
+    product_id  : Int  @doc(description: "Query by product_id.") 
+    price  : Float  @doc(description: "Query by price.") 
+    website_id  : Int  @doc(description: "Query by website_id.") 
+    add_date  : String  @doc(description: "Query by add_date.") 
+    send_count  : String  @doc(description: "Query by send_count.") 
+    status  : Int  @doc(description: "Query by status.") 
+    subscriber_email  : String  @doc(description: "Query by subscriber_email.") 
+    subscriber_name  : String  @doc(description: "Query by subscriber_name.") 
+    token  : String  @doc(description: "Query by token.") 
+    message  : String  @doc(description: "Query by message.") 
+    product_sku  : String  @doc(description: "Query by product_sku.") 
+    child_product_id  : Int  @doc(description: "Query by child_product_id.") 
+    last_send_date  : String  @doc(description: "Query by last_send_date.") 
+    store_id  : Int  @doc(description: "Query by store_id.") 
+}
+
+type MySubscribeProductStock {
+    
+    alert_stock_id  : Int  @doc(description: "Query by alert_stock_id.") 
+    customer_id  : String  @doc(description: "Query by customer_id.") 
+    product_id  : Int  @doc(description: "Query by product_id.") 
+    price  : Float  @doc(description: "Query by price.") 
+    website_id  : String  @doc(description: "Query by website_id.") 
+    add_date  : String  @doc(description: "Query by add_date.") 
+    send_count  : String  @doc(description: "Query by send_count.") 
+    status  : Int  @doc(description: "Query by status.") 
+    subscriber_email  : String  @doc(description: "Query by subscriber_email.") 
+    subscriber_name  : String  @doc(description: "Query by subscriber_name.") 
+    token  : String  @doc(description: "Query by token.") 
+    message  : String  @doc(description: "Query by message.") 
+    product_sku  : String  @doc(description: "Query by product_sku.") 
+    child_product_id  : String  @doc(description: "Query by child_product_id.") 
+    last_send_date  : String  @doc(description: "Query by last_send_date.") 
+    store_id  : Int  @doc(description: "Query by store_id.") 
+    parent_product_id  : String  @doc(description: "Query by parent_product_id.") 
+    super_attribute  : String  @doc(description: "Query by super_attribute.") 
+    params  : String  @doc(description: "Query by params.") 
+}
+
+type MySubscribeProductStocks @doc(description: "The subscribe product stock object is the top-level object returned in a product stock search.") {
+    items: [MySubscribeProductStock] @doc(description: "An array of subscribe product stocks that match the specified search criteria.")
+    page_info: SearchResultPageInfo @doc(description: "An object that includes the page_info and currentPage values specified in the query.")
+    total_count: Int @doc(description: "The number of subscribe product stocks that are marked as visible.")
+    sort_fields: SortFields @doc(description: "An object that includes the default sort field and all available sort fields.") @resolver(class: "Lof\\ProductNotificationGraphQl\\Model\\Resolver\\MySubscribeProductStock\\SortFields")
+}
+
+type MySubscribeProductSalePrices @doc(description: "The subscribe product sale price object is the top-level object returned in a product sale price search.") {
+    items: [MySubscribeProductSalePrice] @doc(description: "An array of subscribe product sale prices that match the specified search criteria.")
+    page_info: SearchResultPageInfo @doc(description: "An object that includes the page_info and currentPage values specified in the query.")
+    total_count: Int @doc(description: "The number of subscribe product sale prices that are marked as visible.")
+    sort_fields: SortFields @doc(description: "An object that includes the default sort field and all available sort fields.") @resolver(class: "Lof\\ProductNotificationGraphQl\\Model\\Resolver\\MySubscribeProductSalePrice\\SortFields")
+}
+
+type SortField {
+    value: String @doc(description: "Attribute code of sort field.")
+    label: String @doc(description: "Label of sort field.")
+}
+type SortFields @doc(description: "SortFields contains a default value for sort fields and all available sort fields.") {
+    default: String @doc(description: "Default value of sort fields.")
+    options: [SortField] @doc(description: "Available sort fields.")
+}
+
+type StoreConfig {
+    
+    productnotification_enable  : String  @doc(description: "Query by productnotification_enable.") 
+    productnotification_price  : String  @doc(description: "Query by productnotification_price.") 
+    productnotification_price_guest  : String  @doc(description: "Query by productnotification_price_guest.") 
+    productnotification_allow_stock  : String  @doc(description: "Query by productnotification_allow_stock.") 
+    productnotification_disable_stock_guest  : String  @doc(description: "Query by productnotification_disable_stock_guest.") 
+    productnotification_allow_new_product  : String  @doc(description: "Query by productnotification_allow_new_product.") 
+    productnotification_cat_ids  : String  @doc(description: "Query by productnotification_cat_ids.") 
+}

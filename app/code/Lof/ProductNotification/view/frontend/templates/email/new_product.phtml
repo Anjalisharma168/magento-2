@@ -1,0 +1,48 @@
+<?php
+/**
+ * Copyright © 2013-2017 Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+
+/** @var $block \Lof\ProductNotification\Block\Email\NewProduct */
+$alert = $this->getAlert();
+$storeId = $alert ? $alert->getStoreId(): 0;
+$storeId = !$storeId ? $this->getStore()->getId() : $storeId;
+?>
+<?php if ($_products = $block->getProducts()): ?>
+<p><?= /* @escapeNotVerified */  __('New Product Just Was Created On The Store:') ?></p>
+<table>
+<?php /** @var $_product \Magento\Catalog\Model\Product */ ?>
+<?php foreach ($_products as $_product): ?>
+    <?php $_product->setStoreId($storeId); ?>
+    <tr>
+        <td class="col photo">
+            <a href="<?= /* @escapeNotVerified */  $_product->getProductUrl() ?>" title="<?= $block->escapeHtml($_product->getName()) ?>" class="product photo">
+                <?php echo $block->getImage($_product, 'product_thumbnail_image', ['class' => 'photo image'])->toHtml(); ?>
+            </a>
+        </td>
+        <td class="col item">
+            <p>
+                <strong class="product name">
+                    <a href="<?= /* @escapeNotVerified */  $_product->getProductUrl() ?>"><?= $block->escapeHtml($_product->getName()) ?></a>
+                </strong>
+            </p>
+            <?php if ($shortDescription = $block->getFilteredContent($_product->getShortDescription())): ?>
+                <p><small><?= /* @escapeNotVerified */  $shortDescription ?></small></p>
+            <?php endif; ?>
+            <?= $block->getProductPriceHtml(
+                    $_product,
+                    \Magento\Catalog\Pricing\Price\FinalPrice::PRICE_CODE,
+                    \Magento\Framework\Pricing\Render::ZONE_EMAIL,
+                    [
+                        'display_label' => __('Price:')
+                    ]
+                );
+                ?>
+        </td>
+    </tr>
+<?php endforeach; ?>
+</table>
+<?php endif; ?>

@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<type name="Magento\StoreGraphQl\Model\Resolver\Store\StoreConfigDataProvider">
+		<arguments>
+			<argument name="extendedConfigData" xsi:type="array">
+				<item name="productnotification_enable" xsi:type="string">productnotification/general_settings/enable</item>
+				<item name="productnotification_allow_price" xsi:type="string">productnotification/productalert/allow_price</item>
+				<item name="productnotification_disable_price_guest" xsi:type="string">productnotification/productalert/disable_price_guest</item>
+				<item name="productnotification_allow_stock" xsi:type="string">productnotification/productalert/allow_stock</item>
+				<item name="productnotification_disable_stock_guest" xsi:type="string">productnotification/productalert/disable_stock_guest</item>
+				<item name="productnotification_allow_new_product" xsi:type="string">productnotification/productalert/allow_new_product</item>
+				<item name="productnotification_cat_ids" xsi:type="string">productnotification/productalert/cat_ids</item>
+			</argument>
+		</arguments>
+	</type>
+</config>

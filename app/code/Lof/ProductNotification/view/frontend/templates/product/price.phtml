@@ -1,0 +1,87 @@
+<?php
+/** @var $block \Lof\ProductNotification\Block\Product\Price */
+?>
+<?php
+use Magento\Framework\App\Action\Action;
+$_product      = $block->getProduct();
+$helper        = $this->helper('\Lof\ProductNotification\Helper\Data');
+$productHelper = $this->helper('\Lof\ProductNotification\Helper\Product');
+$_quote        = $productHelper->getQuote();
+$customer      = $_quote->getCustomer();
+?>
+<div class="authentication-wrapper lofproductreviews pnf-form pnf-price" data-block="authentication1" <?php if (!$_product->isAvailable()) : ?>style="display: block;"<?php endif; ?>>
+    <button
+        type="button"
+        class="action action-auth-toggle"
+        data-trigger="authentication1">
+        <span><?php echo __('Notify me when the price drops') ?></span>
+    </button>
+    <div class="block-authentication"
+         style="display: none"
+         data-bind="mageInit: {
+            'Magento_Ui/js/modal/modal':{
+                'type': 'custom',
+                'modalClass': 'authentication-dropdown',
+                'trigger': '[data-trigger=authentication1]',
+                'wrapperClass': 'pnf-price',
+                'parentModalClass': '_has-modal-custom _has-price-form _has-auth-shown',
+                'responsive': true,
+                'responsiveClass': 'custom-slide',
+                'overlayClass': 'dropdown-overlay modal-custom-overlay',
+                'buttons': []
+            }}">
+
+        <div class="block">
+            <div class="block-title">
+                <strong role="heading" aria-level="2"><?php echo __('Notify me when the price drops') ?></strong>
+            </div>
+            <div class="block-content">
+                <?php $postParams = $productHelper->getSubscribePricePostParams($_product); ?>
+                <form id="pnf-price" method="post" data-mage-init='{"validation":{}}' action="<?php /* @escapeNotVerified */ echo $postParams['action']; ?>">
+                    <input name="context" type="hidden" value="product" />
+                    <input type="hidden" name="product" value="<?php echo $postParams['data']['product']; ?>">
+                    <input type="hidden" name="<?php echo Action::PARAM_NAME_URL_ENCODED; ?>" value="<?php echo $postParams['data'][Action::PARAM_NAME_URL_ENCODED]; ?>">
+                    <?php echo $block->getBlockHtml('formkey')?>
+                    <div class="fieldset" >
+                        <?php if (!$helper->isLoggedIn()) { ?>
+                        <div class="field field-email required">
+                            <label class="label" for="subscriber-email"><span><?php echo __('Email Address') ?></span></label>
+                            <div class="control">
+                                <input type="email"
+                                       class="input-text"
+                                       id="subscriber-email"
+                                       name="subscriber_email"
+                                       autocomplete="autocomplete"
+                                       value="<?php echo $_quote->getCustomer()?$_quote->getCustomer()->getEmail():$_quote->getPnfCustomerEmail() ?>"
+                                       data-validate="{required:true, 'validate-email':true}" />
+                            </div>
+                        </div>
+                        <div class="field field-subscriber-name">
+                            <label class="label" for="subscriber-name"><span><?php echo __('Name') ?></span></label>
+                            <div class="control">
+                                <input type="text"
+                                       class="input-text"
+                                       id="subscriber-name"
+                                       value="<?php echo $customer && $customer->getFirstName() ? $customer->getFirstName() . ' ' . $customer->getMiddleName() . $customer->getLastName() :$_quote->getPnfCustomerName() ?>"
+                                       name="subscriber_name"/>
+                            </div>
+                        </div>
+                        <?php } ?>
+                        <div class="field field-message">
+                            <label for="pn-message" class="label"><span><?php echo __('Message') ?></span></label>
+                            <div class="control">
+                                <textarea id="pn-message" rows="4" class="input-textarea" name="message"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="actions-toolbar">
+                        <div class="primary">
+                            <button type="submit" class="action primary"><span><?php echo __('Subscribe') ?></span></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
